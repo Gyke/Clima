@@ -12,19 +12,21 @@ struct WeatherManager {
     
     let openWeatherURL = "https://api.openweathermap.org/data/2.5/weather"
     var appID: String
-    var cityName: String
     var units: String
     
     var delegate: WeatherManagerDelegate?
     
-    init(appID: String, cityName: String, units: String = "metric") {
+    init(appID: String, units: String = "metric") {
         self.appID = appID
-        self.cityName = cityName
         self.units = units
     }
     
-    func getFetchUrl() -> URL? {
+    func getFetchUrl(by cityName: String) -> URL? {
         return URL(string: "\(openWeatherURL)?appid=\(appID)&units=\(units)&q=\(cityName)")
+    }
+    
+    func getFetchUrl(by lat: Double, and lon: Double) -> URL? {
+        return URL(string: "\(openWeatherURL)?appid=\(appID)&units=\(units)&lat=\(lat)&lon=\(lon)")
     }
     
     func createSession(with url: URL) -> URLSession {
@@ -46,12 +48,20 @@ struct WeatherManager {
         task.resume()
     }
     
-    func fetch() {
-        if let fetchURL = getFetchUrl() {
+    func fetch(by cityName: String) {
+        if let fetchURL = getFetchUrl(by: cityName) {
             let session = createSession(with: fetchURL)
             startTask(for: session, with: fetchURL)
         }
     }
+    
+    func fetch(by lat: Double, and lon: Double) {
+        if let fetchURL = getFetchUrl(by: lat, and: lon) {
+            let session = createSession(with: fetchURL)
+            startTask(for: session, with: fetchURL)
+        }
+    }
+
     func parseJSON(_ weatherData: Data) -> WeatherModel? {
         let decoder = JSONDecoder()
         do {

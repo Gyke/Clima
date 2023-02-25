@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherViewController: UIViewController {
 
@@ -15,12 +16,47 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchButtonView: UIButton!
+    
+    var weatherManager: WeatherManager?
+    let appid = "6d2d8b70eee2e0fb60d968d3d7de6392"
+
+    let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.delegate = self
         searchTextField.delegate = self
+        
+        weatherManager = WeatherManager(appID: appid)
+        weatherManager?.delegate = self
+
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
     }
+    
  
+    @IBAction func locationButtonPressed(_ sender: UIButton) {
+        locationManager.requestLocation()
+    }
+}
+
+//MARK: - CLLocationManagerDelegate
+extension WeatherViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            locationManager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            
+            weatherManager!.fetch(by: lat, and: lon)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    
 }
 
 //MARK: - UITextFieldDelegate
@@ -49,11 +85,8 @@ extension WeatherViewController: UITextFieldDelegate {
     
     func doSearch() {
         searchTextField.endEditing(true)
-        let appid = "6d2d8b70eee2e0fb60d968d3d7de6392"
-        var weathrManager = WeatherManager(appID: appid, cityName: searchTextField.text!)
-        weathrManager.delegate = self
 
-        weathrManager.fetch()
+        weatherManager!.fetch(by: searchTextField.text!)
         searchTextField.text = ""
         searchButtonView.isEnabled = false
     }
