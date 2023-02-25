@@ -9,11 +9,13 @@
 import Foundation
 
 struct WeatherManager {
-
+    
     let openWeatherURL = "https://api.openweathermap.org/data/2.5/weather"
     var appID: String
     var cityName: String
     var units: String
+    
+    var delegate: WeatherManagerDelegate?
     
     init(appID: String, cityName: String, units: String = "metric") {
         self.appID = appID
@@ -32,13 +34,13 @@ struct WeatherManager {
     func startTask(for session: URLSession, with url: URL) {
         let task = session.dataTask(with: url) { (data, response, error) in
             if let error = error {
-//                TODO: Всплывающее окно, где будет сказано, что название города введено неправильно
-                print("Got some erorr")
-                print(error)
+                delegate?.didFailWithError(error: error)
                 return
             }
             if let data = data {
-                parseJSON(weatherData: data)
+                if let weather = parseJSON(data) {
+                    delegate?.didUpdateWeather(self, weather: weather)
+                }
             }
         }
         task.resume()
@@ -48,19 +50,18 @@ struct WeatherManager {
         if let fetchURL = getFetchUrl() {
             let session = createSession(with: fetchURL)
             startTask(for: session, with: fetchURL)
-        } else {
-            print("Can not access to the server")
         }
     }
-    func parseJSON(weatherData: Data) {
+    func parseJSON(_ weatherData: Data) -> WeatherModel? {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: weatherData)
-            print(decodedData.main.temp)
-            print(decodedData.weather.first?.main)
+            let weather = WeatherModel(conditionId: decodedData.weather.first!.id, cityName: decodedData.name, temperature: decodedData.main.temp)
+            return weather
         } catch {
-            print(error)
+            delegate?.didFailWithError(error: error)
+            return nil
         }
-
+        
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController, UITextFieldDelegate {
+class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
 
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -42,10 +42,24 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        DispatchQueue.main.async {
+            self.temperatureLabel.text = weather.temperatureString
+            self.conditionImageView.image = UIImage(systemName: weather.conditionName)
+            self.cityLabel.text = weather.cityName
+        }
+    }
+    
+    func didFailWithError(error: Error) {
+        //                TODO: Всплывающее окно, где будет сказано, что название города введено неправильно
+        print(error)
+    }
+    
     func doSearch() {
         searchTextField.endEditing(true)
         let appid = "6d2d8b70eee2e0fb60d968d3d7de6392"
-        let weathrManager = WeatherManager(appID: appid, cityName: searchTextField.text!)
+        var weathrManager = WeatherManager(appID: appid, cityName: searchTextField.text!)
+        weathrManager.delegate = self
 
         weathrManager.fetch()
         searchTextField.text = ""
