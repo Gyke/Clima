@@ -42,7 +42,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="search" enablesReturnKeyAutomatically="YES" textContentType="location"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cr-pd-dUW">
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cr-pd-dUW">
                                                 <rect key="frame" x="334" y="0.5" width="40" height="38.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="fiO-2W-UTJ"/>
@@ -119,6 +119,7 @@
                     <connections>
                         <outlet property="cityLabel" destination="CWP-r8-Jsy" id="8cQ-3l-ufV"/>
                         <outlet property="conditionImageView" destination="mYn-vV-MBC" id="gpD-FU-YB0"/>
+                        <outlet property="searchButtonView" destination="4Cr-pd-dUW" id="1iG-qi-tFv"/>
                         <outlet property="searchTextField" destination="2eh-wL-W34" id="8Rs-S9-XcE"/>
                         <outlet property="temperatureLabel" destination="w9o-tW-03D" id="mF4-vV-JxK"/>
                     </connections>

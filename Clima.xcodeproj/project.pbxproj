@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FBCB92729A9D65B003048AD /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBCB92629A9D65B003048AD /* WeatherManager.swift */; };
+		2FBCB92B29AA013A003048AD /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBCB92A29AA013A003048AD /* WeatherData.swift */; };
 		ADAA27B1231BBFAF00365194 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA27B0231BBFAF00365194 /* AppDelegate.swift */; };
 		ADAA27B3231BBFAF00365194 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA27B2231BBFAF00365194 /* SceneDelegate.swift */; };
 		ADAA27B5231BBFAF00365194 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAA27B4231BBFAF00365194 /* WeatherViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2FBCB92629A9D65B003048AD /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
+		2FBCB92A29AA013A003048AD /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		ADAA27AD231BBFAF00365194 /* Clima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADAA27B0231BBFAF00365194 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADAA27B2231BBFAF00365194 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +43,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2FBCB92929A9D66D003048AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2FBCB92629A9D65B003048AD /* WeatherManager.swift */,
+				2FBCB92A29AA013A003048AD /* WeatherData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		ADAA27A4231BBFAF00365194 = {
 			isa = PBXGroup;
 			children = (
@@ -61,7 +74,7 @@
 			children = (
 				ADAA27B0231BBFAF00365194 /* AppDelegate.swift */,
 				ADAA27B2231BBFAF00365194 /* SceneDelegate.swift */,
-				ADAA27CA231BC3FA00365194 /* Model */,
+				2FBCB92929A9D66D003048AD /* Models */,
 				ADAA27C9231BC3F200365194 /* View */,
 				ADAA27C8231BC3E500365194 /* Controller */,
 				ADAA27B9231BBFB300365194 /* Assets.xcassets */,
@@ -85,13 +98,6 @@
 				ADAA27B6231BBFAF00365194 /* Main.storyboard */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		ADAA27CA231BC3FA00365194 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,7 +127,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = "App Brewery";
 				TargetAttributes = {
 					ADAA27AC231BBFAF00365194 = {
@@ -167,7 +173,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADAA27B5231BBFAF00365194 /* WeatherViewController.swift in Sources */,
+				2FBCB92B29AA013A003048AD /* WeatherData.swift in Sources */,
 				ADAA27B1231BBFAF00365194 /* AppDelegate.swift in Sources */,
+				2FBCB92729A9D65B003048AD /* WeatherManager.swift in Sources */,
 				ADAA27B3231BBFAF00365194 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +228,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -280,6 +289,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
